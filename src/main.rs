@@ -3,8 +3,15 @@ use std::process::Command;
 
 fn main() {
 
-    Command::new("clear")
-        .status().unwrap();
+
+    /*
+        wtf?
+        try to clear using cls if panic use clear for no other reason than i can 💪
+    */
+    match Command::new("cls").status(){
+        Ok(status) => status,
+        Err(_e) => Command::new("clear").status().unwrap()
+    };
 
     let limit: i32 = i32_input("enter a limit");
 
